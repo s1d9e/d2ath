@@ -11,6 +11,7 @@
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
   <img src="https://img.shields.io/github/stars/s1d9e/d2ath?style=flat-square" alt="Stars">
   <img src="https://img.shields.io/github/forks/s1d9e/d2ath?style=flat-square" alt="Forks">
+  <img src="https://github.com/s1d9e/d2ath/actions/workflows/python-app.yml/badge.svg" alt="CI">
 </p>
 
 <p align="center">
@@ -166,12 +167,12 @@ d2ath/
 - ✅ Usage personnel sur vos propres systèmes
 - ✅ Recherche en cybersécurité
 
-**Ce programme ne doit pas être utilisé pour :**
-- ❌ Accéder à des systèmes sans autorisation
-- ❌ Activités illégales ou malveillantes
-- ❌ Tout autre usage非éthique ou非légal
+**Ce programme ne doit pas être utilise pour :**
+- ❌ Acceder a systemes sans autorisation
+- ❌ Activites illegales ou malveillantes
+- ❌ Tout autre usage non ethique ou illegal
 
-**L'auteur ne peut être tenu responsable de toute utilisation 非appropriée.**
+**L'auteur ne peut etre tenu responsable de toute utilisation inappropriatee.**
 
 ---
 
