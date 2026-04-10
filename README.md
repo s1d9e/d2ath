@@ -1,93 +1,98 @@
-# ██╗███╗   ██╗██╗  ██╗██╗   ██╗███████╗
-# ██║████╗  ██║██║ ██╔╝██║   ██║██╔════╝
-# ██║██╔██╗ ██║█████╔╝ ██║   ██║███████╗
-# ██║██║╚██╗██║██╔═██╗ ██║   ██║╚════██║
-# ██║██║ ╚████║██║  ██╗╚██████╔╝███████║
-# ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-# ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+# d2ath - Security Framework
+
+```
+██████╗ ███████╗███████╗██╗    ██╗ █████╗ ██╗     ██╗     ███████╗███████╗
+██╔══██╗██╔════╝██╔════╝██║    ██║██╔══██╗██║     ██║     ██╔════╝██╔════╝
+██████╔╝█████╗  █████╗  ██║ █╗ ██║███████║██║     ██║     █████╗  ███████╗
+██╔══██╗██╔══╝  ██╔══╝  ██║███╗██║██╔══██║██║     ██║     ██╔══╝  ╚════██║
+██║  ██║███████╗███████╗╚███╔███╔╝██║  ██║███████╗███████╗███████╗███████║
+╚═╝  ╚═╝╚══════╝╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚══════╝
+```
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
   <img src="https://img.shields.io/github/stars/s1d9e/d2ath?style=flat-square" alt="Stars">
   <img src="https://img.shields.io/github/forks/s1d9e/d2ath?style=flat-square" alt="Forks">
-  <img src="https://github.com/s1d9e/d2ath/actions/workflows/python-app.yml/badge.svg" alt="CI">
 </p>
 
 <p align="center">
-  <b>Framework de sécurité ofensiva et défensiva tout-en-un pour Linux.</b>
+  <b>All-in-one offensive and defensive security framework for Linux.</b>
+</p>
+
+<p align="center">
+  <b>All-in-one offensive and defensive security framework for Linux.</b>
 </p>
 
 ---
 
-## ⚠️ Avertissement
+## ⚠️ Disclaimer
 
-> **IMPORTANT** : Ce projet est fourni à des fins **éducatives uniquement**. 
-> L'auteur **décline toute responsabilité** en cas de mauvaise utilisation de cet outil.
-> Toute action interdite sans consentement explicite est **illégale**.
+> **IMPORTANT**: This project is provided for **educational purposes only**.
+> The author **declines any responsibility** for misuse of this tool.
+> Any unauthorized action without explicit consent is **illegal**.
 
 ---
 
-## 📋 Table des matières
+## 📋 Table of Contents
 
-- [Fonctionnalités](#-fonctionnalités)
+- [Features](#-features)
 - [Installation](#-installation)
-- [Capture d'écran](#-capture-décran)
+- [Screenshots](#-screenshots)
 - [Structure](#-structure)
-- [Prérequis](#-prérequis)
-- [Avertissement](#-avertissement)
-- [Licence](#-licence)
+- [Requirements](#-requirements)
+- [Disclaimer](#-disclaimer)
+- [License](#-license)
+- [Translations](#translations)
 
 ---
 
-## 🔧 Fonctionnalités
+## 🔧 Features
 
-### 📁 Structure par catégorie
+### 📁 Categories
 
-| Catégorie | Description |
-|-----------|-------------|
-| **Reconnaissance** | Scan de ports, ping scan, DNS lookup, Whois, GeoIP, Traceroute |
-| **Réseau** | Mon IP, IP locale, Netdiscover, Wireshark, Ping, Vérification de port |
-| **Cryptographie** | Générateur de mots de passe, Hash (MD5, SHA256), Base64, URL encode/decode |
-| **Système** | Informations système, Exploration de fichiers |
-| **Exploitation** | Reverse Shell, Encoder/Decoder payloads, Serveur HTTP, Download & Execute, Metasploit |
+| Category | Description |
+|----------|-------------|
+| **Reconnaissance** | Port scan, ping scan, DNS lookup, Whois, GeoIP, Traceroute |
+| **Network** | My IP, Local IP, Netdiscover, Wireshark, Ping, Port check |
+| **Cryptography** | Password generator, Hash (MD5, SHA256), Base64, URL encode/decode |
+| **System** | System info, File explorer |
+| **Exploitation** | Reverse Shell, Encoder/Decoder payloads, HTTP server, Download & Execute, Metasploit |
 | **Audit** | Nmap, Masscan, Aircrack-ng, Nikto, Hydra, John the Ripper, Hashcat, SQLMap |
 
-### 🛠️ Outils intégrés
+### 🛠️ Integrated Tools
 
-- **Scanner de ports** - Scan rapide des ports ouverts
-- **Ping scan** - Découverte des hôtes actifs sur un réseau
-- **DNS Lookup** - Résolution DNS et reverse lookup
-- **GeoIP** - Localisation géographique d'une adresse IP
-- **Netdiscover** - Scan ARP du réseau local
-- **Wireshark** - Analyseur de paquets réseau (tshark/tcpdump)
-- **Nmap** - Scanner de ports avancé
-- **Aircrack-ng** - Suite d'outils pour attaques WiFi
-- **Hydra** - Attaque par force brute sur les services de connexion
-- **SQLMap** - Détection et exploitation d'injections SQL
-- **Et bien plus...**
+- **Port Scanner** - Fast scan of open ports
+- **Ping Scan** - Discover active hosts on a network
+- **DNS Lookup** - DNS resolution and reverse lookup
+- **GeoIP** - Geographic location of an IP address
+- **Netdiscover** - ARP scan of local network
+- **Wireshark** - Network packet analyzer (tshark/tcpdump)
+- **Nmap** - Advanced port scanner
+- **Aircrack-ng** - WiFi attack suite
+- **Hydra** - Brute force attack on login services
+- **SQLMap** - Detection and exploitation of SQL injections
+- **And more...**
 
 ---
 
 ## 💻 Installation
 
 ```bash
-# Cloner le dépôt
+# Clone repository
 git clone https://github.com/s1d9e/d2ath.git
 
-# Entrer dans le répertoire
+# Enter directory
 cd d2ath
 
-# Rendre le script exécutable
+# Make executable
 chmod +x d2ath.py
 
-# Exécuter
+# Run
 python3 d2ath.py
 ```
 
-### Dépendances (installation automatique si manquantes)
-
-La plupart des dépendances sont installées automatiquement. Pour une installation manuelle :
+### Dependencies (auto-installed if missing)
 
 ```bash
 # Ubuntu / Debian
@@ -103,34 +108,50 @@ sudo dnf install python3 python3-pip nmap masscan netdiscover wireshark-cli tcpd
 
 ---
 
-## 📷 Capture d'écran
+## 📷 Screenshot
 
 ```
-:::::::-.    .:::. .,::::::   :::. :::::::::::: ::   .:  
- ;;,   `';, ,;'``;.;;;;''''   ;;`;;;;;;;';;,;;   ;;, 
- `[[     [[ ''  ,[['[[cccc   ,[[ '[[,   [[    ,[[[,,,[[[ 
-  $$,    $$ .c$$P'  $$""""  c$$$cc$$$c  $$    "$$$""$$$ 
- 888_,o8P'd88 _,oo,888oo,__  888   888,  88,    888   "88o
-  MMMMP"`  MMMUP*"^^""""YUMMMYMM   ""`  MMM    MMM    YMM 
+  ██████╗ ██████╗ ███╗   ██╗███████╗ ██████╗ ██╗     ███████╗███████╗
+ ██╔════╝██╔═══██╗████╗  ██║██╔════╝██╔═══██╗██║     ██╔════╝██╔════╝
+ ██║     ██║   ██║██╔██╗ ██║███████╗██║   ██║██║     █████╗  ███████╗
+ ██║     ██║   ██║██║╚██╗██║╚════██║██║   ██║██║     ██╔══╝  ╚════██║
+ ╚██████╗╚██████╔╝██║ ╚████║███████║╚██████╔╝███████╗███████╗███████║
+  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚══════╝╚══════╝╚══════╝
+                                                                v2.0
+
+    ╔════════════════════════════════════════════════════════════╗
+    ║  d2ath - Security Framework                                   ║
+    ║  Offensive & Defensive Security Toolkit                      ║
+    ║                                                              ║
+    ║     ██████╗ ██╗   ██╗██████╗ ███████╗██████╗                 ║
+     ██╔═══██╗╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗                ║
+    ║  ██████╔╝ ╚████╔╝ ██████╔╝█████╗  ██████╔╝                ║
+    ║  ██╔═══╝   ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗                ║
+    ║  ██║        ██║   ██████╔╝███████╗██║  ██║                ║
+     ╚═╝         ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝                ║
+    ║                                                              ║
+    ║       [1] RECON    [2] NETWORK   [3] CRYPTO               ║
+    ║       [4] SYSTEM   [5] EXPLOIT   [6] AUDIT               ║
+    ╚════════════════════════════════════════════════════════════╝
 
    ┌─────────────────────────────────────────┐
-   │         SÉLECTIONNER UNE CATÉGORIE          │
+   │         SELECT A CATEGORY              │
    └─────────────────────────────────────────┘
 
    ┌─[ 1 ]  ▸ RECONNAISSANCE
    └─────────────────────────────────────────────╜
-   ┌─[ 2 ]  ▸ RÉSEAU
+   ┌─[ 2 ]  ▸ NETWORK
    └─────────────────────────────────────────────╜
-   ┌─[ 3 ]  ▸ CRYPTOGRAPHIE
+   ┌─[ 3 ]  ▸ CRYPTOGRAPHY
    └─────────────────────────────────────────────╜
-   ┌─[ 4 ]  ▸ SYSTÈME
+   ┌─[ 4 ]  ▸ SYSTEM
    └─────────────────────────────────────────────╜
    ┌─[ 5 ]  ▸ EXPLOITATION
    └─────────────────────────────────────────────╜
    ┌─[ 6 ]  ▸ AUDIT
    └─────────────────────────────────────────────╜
 
-   ┌─[ q ]  Quitter
+   ┌─[ q ]  Quit
    └────────────────────╜
 ```
 
@@ -140,53 +161,64 @@ sudo dnf install python3 python3-pip nmap masscan netdiscover wireshark-cli tcpd
 
 ```
 d2ath/
-├── d2ath.py      # Script principal
-├── colors.py     # Module de couleurs (optionnel)
-├── README.md     # Ce fichier
-├── LICENSE       # Licence MIT
+├── d2ath.py         # Main script
+├── README.md        # English (main)
+├── README_FR.md     # French
+├── README_ES.md     # Spanish
+├── README_DE.md     # German
+├── LICENSE          # MIT License
 └── .github/
     └── workflows/
-        └── lint.yml  # GitHub Actions
+        └── lint.yml
 ```
 
 ---
 
-## 📌 Prérequis
+## 📌 Requirements
 
 - **Python 3.8+**
-- **Système d'exploitation** : Linux (optimisé pour Kali, Ubuntu, Debian, Arch)
-- **Permissions** : root/sudo requis pour certains outils (netdiscover, aircrack-ng, nmap)
+- **OS**: Linux (optimized for Kali, Ubuntu, Debian, Arch)
+- **Permissions**: root/sudo required for some tools (netdiscover, aircrack-ng, nmap)
 
 ---
 
-## ⚠️ Avertissement légal
+## ⚠️ Legal Disclaimer
 
-**Ce programme est destiné à :**
-- ✅ Tests de pénétration autorisés
-- ✅ Sécurité informatique éducative
-- ✅ Usage personnel sur vos propres systèmes
-- ✅ Recherche en cybersécurité
+**This program is intended for:**
+- ✅ Authorized penetration testing
+- ✅ Educational computer security
+- ✅ Personal use on your own systems
+- ✅ Cybersecurity research
 
-**Ce programme ne doit pas être utilise pour :**
-- ❌ Acceder a systemes sans autorisation
-- ❌ Activites illegales ou malveillantes
-- ❌ Tout autre usage non ethique ou illegal
+**This program must NOT be used for:**
+- ❌ Unauthorized system access
+- ❌ Illegal or malicious activities
+- ❌ Any other unethical or illegal use
 
-**L'auteur ne peut etre tenu responsable de toute utilisation inappropriatee.**
+**The author cannot be held responsible for any inappropriate use.**
 
 ---
 
-## 📄 Licence
+## 📄 License
 
-Ce projet est sous licence **MIT**. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+
+---
+
+## 🌐 Translations
+
+- [English](README.md) (Main)
+- [Français](README_FR.md)
+- [Español](README_ES.md)
+- [Deutsch](README_DE.md)
 
 ---
 
 <p align="center">
-  <b>Fait avec ❤️ par <a href="https://github.com/s1d9e">s1d9e</a></b>
+  <b>Made with ❤️ by <a href="https://github.com/s1d9e">s1d9e</a></b>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2.0-blue?style=flat-square" alt="Version">
   <img src="https://img.shields.io/badge/Python-3.8+-blue?style=flat-square" alt="Python">
 </p>
