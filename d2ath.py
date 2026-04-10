@@ -8,9 +8,9 @@ import string
 import random
 import base64
 import json
+import shlex
+import re
 from pathlib import Path
-
-os.system("")
 
 class C:
     HEADER = ""
@@ -83,6 +83,9 @@ def get_input_ip(prompt):
         else:
             print(f"{C.GRAY}[!] Impossible de récupérer mon IP{C.RESET}")
             return None
+    if not re.match(r'^[\d.]+$', choice):
+        print(f"{C.GRAY}[!] Format IP invalide{C.RESET}")
+        return None
     return choice
 
 def get_input_domain(prompt):
@@ -94,6 +97,9 @@ def get_input_domain(prompt):
         if my_ip:
             print(f"{C.WHITE}[*] Utilisation de mon IP: {C.WHITE}{my_ip}{C.RESET}")
             return my_ip
+        return None
+    if not re.match(r'^[\w.\-]+$', choice):
+        print(f"{C.GRAY}[!] Format domaine invalide{C.RESET}")
         return None
     return choice
 
@@ -326,7 +332,7 @@ def tool_whois():
     print(f"\n{C.GRAY}[*] Recherche WHOIS sur {target}...{C.RESET}\n")
     
     try:
-        result = subprocess.run(["whois", target], capture_output=True, text=True, timeout=10)
+        result = subprocess.run(["whois", shlex.quote(target)], capture_output=True, text=True, timeout=10)
         if result.stdout:
             print(f"{C.WHITE}{result.stdout[:3000]}{C.RESET}")
         else:
@@ -369,8 +375,8 @@ def tool_geoip():
             print(f"{C.WHITE}[+] Timezone: {C.WHITE}{data.get('timezone', 'N/A')}{C.RESET}")
             print(f"{C.WHITE}[+] ASN: {C.WHITE}{data.get('org', 'N/A')}{C.RESET}")
             
-            if "loc" in data and data["loc"]:
-                lat, lon = data["loc"].split(",")
+            if "loc" in data and data["loc"] and "," in data["loc"]:
+                lat, lon = data["loc"].split(",", 1)
                 print(f"\n{C.GRAY}   Maps: https://www.google.com/maps?q={lat},{lon}{C.RESET}")
     except Exception as e:
         print(f"{C.GRAY}[!] Erreur: {e}{C.RESET}")
@@ -393,7 +399,7 @@ def tool_traceroute():
     
     try:
         param = "tracert" if sys.platform == "win32" else "traceroute"
-        result = subprocess.run([param, target], capture_output=True, text=True, timeout=30)
+        result = subprocess.run([param, shlex.quote(target)], capture_output=True, text=True, timeout=30)
         print(f"{C.WHITE}{result.stdout[:2000]}{C.RESET}")
     except Exception as e:
         print(f"{C.GRAY}[!] Erreur: {e}{C.RESET}")
@@ -500,14 +506,18 @@ def tool_gateway():
     
     try:
         result = subprocess.check_output(["ip", "route", "show", "default"], text=True)
-        gw = result.split()[2]
-        print(f"{C.WHITE}[+] Passerelle: {C.WHITE}{gw}{C.RESET}")
-        
-        try:
-            hostname = socket.gethostbyaddr(gw)[0]
-            print(f"{C.GRAY}    DNS inverse: {C.WHITE}{hostname}{C.RESET}")
-        except:
-            pass
+        parts = result.split()
+        if len(parts) >= 3:
+            gw = parts[2]
+            print(f"{C.WHITE}[+] Passerelle: {C.WHITE}{gw}{C.RESET}")
+            
+            try:
+                hostname = socket.gethostbyaddr(gw)[0]
+                print(f"{C.GRAY}    DNS inverse: {C.WHITE}{hostname}{C.RESET}")
+            except:
+                pass
+        else:
+            raise ValueError("Format inattendu")
     except:
         try:
             result = subprocess.check_output(["route", "-n"], text=True)
@@ -647,7 +657,7 @@ def tool_netdiscover():
                 if os.path.exists("/etc/debian_version"):
                     subprocess.run(["sudo", "apt", "update"], check=True)
                     subprocess.run(["sudo", "apt", "install", "-y", "netdiscover"], check=True)
-                elif os.path.exists("/etc/arch_release"):
+                elif os.path.exists("/etc/arch-release"):
                     subprocess.run(["sudo", "pacman", "-S", "--noconfirm", "netdiscover"], check=True)
                 elif os.path.exists("/etc/fedora-release"):
                     subprocess.run(["sudo", "dnf", "install", "-y", "netdiscover"], check=True)
@@ -1220,13 +1230,18 @@ def tool_nmap():
     
     scan_type = input(f"{C.GRAY}>>> {C.RESET}").strip()
     
-    scans = {
-        "1": ["nmap", "-F", target],
-        "2": ["nmap", "-A", target],
-        "3": ["nmap", "-sS", target],
-        "4": ["nmap", "-sU", target],
-        "5": ["nmap", get_input("Arguments nmap") or "-sV", target],
-    }
+        nmap_args = get_input("Arguments nmap")
+        if nmap_args:
+            nmap_args = shlex.quote(nmap_args)
+        else:
+            nmap_args = "-sV"
+        scans = {
+            "1": ["nmap", "-F", target],
+            "2": ["nmap", "-A", target],
+            "3": ["nmap", "-sS", target],
+            "4": ["nmap", "-sU", target],
+            "5": ["nmap", nmap_args, target],
+        }
     
     cmd = scans.get(scan_type, ["nmap", "-F", target])
     
