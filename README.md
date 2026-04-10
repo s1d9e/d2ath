@@ -1,11 +1,3 @@
-# ██╗███╗   ██╗██╗  ██╗██╗   ██╗███████╗
-# ██║████╗  ██║██║ ██╔╝██║   ██║██╔════╝
-# ██║██╔██╗ ██║█████╔╝ ██║   ██║███████╗
-# ██║██║╚██╗██║██╔═██╗ ██║   ██║╚════██║
-# ██║██║ ╚████║██║  ██╗╚██████╔╝███████║
-# ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-# ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
