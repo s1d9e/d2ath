@@ -7,76 +7,76 @@
 </p>
 
 <p align="center">
-  <b>Framework de sécurité offensiva et defensiva tout-en-un pour Linux.</b><br>
-  <i>Dépendances externes : aucune (bibliothèque standard uniquement).</i>
+  <b>All-in-one offensive & defensive security framework for Linux.</b><br>
+  <i>External dependencies: none (Python standard library only).</i>
 </p>
 
 ---
 
-## ⚠️ Avertissement
+## ⚠️ Disclaimer
 
-> **IMPORTANT** : Ce projet est fourni à des fins **éducatives uniquement**.
-> L'auteur **décline toute responsabilité** en cas de mauvaise utilisation de cet outil.
-> Toute action interdite sans consentement explicite est **illégale**.
+> **IMPORTANT**: This project is provided for **educational purposes only**.
+> The author **accepts no responsibility** for any misuse of this tool.
+> Any action performed without explicit consent is **illegal**.
 
 ---
 
-## 📋 Sommaire
+## 📋 Table of contents
 
-- [Fonctionnalités](#-fonctionnalités)
+- [Features](#-features)
 - [Installation](#-installation)
-- [Utilisation](#-utilisation)
+- [Usage](#-usage)
 - [Structure](#-structure)
-- [Développement](#-développement)
-- [Prérequis](#-prérequis)
-- [Avertissement légal](#-avertissement-légal)
-- [Licence](#-licence)
+- [Development](#-development)
+- [Requirements](#-requirements)
+- [Legal notice](#-legal-notice)
+- [License](#-license)
 
 ---
 
-## 🔧 Fonctionnalités
+## 🔧 Features
 
-| Catégorie | Description |
+| Category | Description |
 |-----------|-------------|
-| **Reconnaissance** | Scan de ports (parallèle), ping scan, DNS, Whois, GeoIP, Traceroute |
-| **Réseau** | IP publique/locale, interfaces, passerelle, port, ping, calculatrice réseau, netdiscover, tshark |
-| **Cryptographie** | Mots de passe forts, hashs (MD5/SHA1/SHA256), Base64, URL encode/decode |
-| **Système** | Informations système, exploration de fichiers |
-| **Exploitation** | Reverse shells, encode/décode payloads, serveur HTTP, download & execute, msfvenom |
+| **Reconnaissance** | Parallel port scanning, ping scan, DNS, Whois, GeoIP, Traceroute |
+| **Network** | Public/local IP, interfaces, gateway, port check, ping, subnet calculator, netdiscover, tshark |
+| **Cryptography** | Strong password generator, hashing (MD5/SHA1/SHA256), Base64, URL encode/decode |
+| **System** | System information, directory listing |
+| **Exploitation** | Reverse shells, payload encode/decode, HTTP server, download & execute, msfvenom |
 | **Audit** | Nmap, Masscan, Aircrack-ng, Nikto, Hydra, John, Hashcat, SQLMap |
 
-### Points forts (v2.0)
+### Highlights (v2.0)
 
-- **CLI complète** : chaque outil est appelable directement en une ligne.
-- **Architecture en package** (`src/d2ath`) : modules par catégorie, registre déclaratif, types, logging.
-- **Aucune dépendance tierce** : bibliothèque standard Python uniquement.
-- **Scans parallèles** (ports, ping) avec `ThreadPoolExecutor`.
-- **Tests pytest** et **CI GitHub Actions** (ruff + tests multi-versions).
-- **`NO_COLOR` supporté**, erreurs typées, codes de sortie standard.
+- **Full CLI**: every tool can be invoked directly from the command line.
+- **Package architecture** (`src/d2ath`): per-category modules, declarative registry, type hints, logging.
+- **Zero third-party dependencies**: Python standard library only.
+- **Parallel scans** (ports, ping) using `ThreadPoolExecutor`.
+- **pytest tests** and **GitHub Actions CI** (ruff + multi-version tests).
+- **`NO_COLOR` support**, typed errors, standard exit codes.
 
 ---
 
 ## 💻 Installation
 
 ```bash
-# Option 1 : installation pip (recommandée)
+# Option 1: pip install (recommended)
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e .
 
-# Option 2 : sans installation, depuis le dépôt
+# Option 2: without installation, from the repo
 cd src && python3 -m d2ath --help
 
-# Vérification
+# Verify
 d2ath --version
 ```
 
-### Outils système optionnels
+### Optional system tools
 
-Certains outils d'audit s'appuient sur des binaires système (`nmap`, `hydra`, `sqlmap`, `whois`, …).
-`d2ath` les détecte et propose de les installer automatiquement en mode interactif.
+Some audit tools rely on system binaries (`nmap`, `hydra`, `sqlmap`, `whois`, …).
+`d2ath` detects them and offers to install them automatically in interactive mode.
 
 ```bash
-# Ubuntu / Debian (Kali inclus)
+# Ubuntu / Debian (including Kali)
 sudo apt install whois nmap masscan netdiscover tshark tcpdump nikto hydra john sqlmap
 
 # Arch Linux
@@ -88,21 +88,21 @@ sudo dnf install nmap masscan netdiscover wireshark-cli tcpdump nikto hydra john
 
 ---
 
-## 🖥️ Utilisation
+## 🖥️ Usage
 
-### Menu interactif
+### Interactive menu
 
 ```bash
 d2ath
 ```
 
-### Ligne de commande
+### Command line
 
 ```bash
-# Lister tous les outils
+# List all tools
 d2ath --list
 
-# Appeler un outil directement
+# Invoke a tool directly
 d2ath ports --target 192.168.1.1
 d2ath ports --target 192.168.1.1 --start 1 --end 10000
 d2ath password --length 20 --special true
@@ -110,21 +110,21 @@ d2ath netcalc --ip 192.168.1.37 --cidr 24
 d2ath hashcat
 ```
 
-Sans paramètres requis, l'outil vous les demande interactivement :
+Missing required parameters are asked interactively:
 
 ```bash
 $ d2ath whois
-[?] IP ou Domaine : example.com
+[?] IP or domain: example.com
 ```
 
-### Codes de sortie
+### Exit codes
 
-| Code | Signification |
-|------|---------------|
-| `0` | Succès |
-| `1` | Échec d'exécution |
-| `2` | Erreur d'usage (paramètre manquant/invalide) |
-| `130` | Interruption (Ctrl+C) |
+| Code | Meaning |
+|------|---------|
+| `0` | Success |
+| `1` | Execution failure |
+| `2` | Usage error (missing/invalid argument) |
+| `130` | Interrupted (Ctrl+C) |
 
 ---
 
@@ -132,33 +132,33 @@ $ d2ath whois
 
 ```
 d2ath/
-├── pyproject.toml            # Packaging, scripts, config ruff/pytest
+├── pyproject.toml            # Packaging, scripts, ruff/pytest config
 ├── src/d2ath/
 │   ├── __init__.py           # Version
 │   ├── __main__.py           # python -m d2ath
-│   ├── cli.py                # Argparse + point d'entrée
-│   ├── app.py                # Boucle TUI interactive
-│   ├── colors.py             # ANSI + NO_COLOR
-│   ├── context.py            # Contexte d'outil (prompt / CLI unifiés)
-│   ├── errors.py             # Exceptions typées
-│   ├── registry.py           # Registre déclaratif des outils
-│   ├── ui.py                 # Bannière et menus
-│   ├── utils.py              # Réseau, calcul réseau, sous-processus, paquets
+│   ├── cli.py                # argparse + entry point
+│   ├── app.py                # Interactive TUI loop
+│   ├── colors.py             # ANSI colors + NO_COLOR
+│   ├── context.py            # Tool context (unified prompt / CLI)
+│   ├── errors.py             # Typed exceptions
+│   ├── registry.py           # Declarative tool registry
+│   ├── ui.py                 # Banner and menus
+│   ├── utils.py              # Network, subnet math, subprocess, packages
 │   └── tools/
 │       ├── recon.py          # Reconnaissance
-│       ├── network.py        # Réseau
-│       ├── crypto.py         # Cryptographie
-│       ├── system.py         # Système
-│       ├── exploit.py        # Exploitation (pédagogique)
+│       ├── network.py        # Network
+│       ├── crypto.py         # Cryptography
+│       ├── system.py         # System
+│       ├── exploit.py        # Exploitation (educational)
 │       └── audit.py          # Audit
-├── tests/                    # Tests pytest
+├── tests/                    # pytest tests
 ├── .github/workflows/ci.yml  # CI (ruff + pytest)
-└── LICENSE                   # Licence MIT
+└── LICENSE                   # MIT License
 ```
 
 ---
 
-## 🧪 Développement
+## 🧪 Development
 
 ```bash
 pip install -e ".[dev]"
@@ -172,37 +172,37 @@ pytest
 
 ---
 
-## 📌 Prérequis
+## 📌 Requirements
 
 - **Python 3.9+**
-- **Système d'exploitation** : Linux (optimisé pour Kali, Ubuntu, Debian, Arch)
-- **Permissions** : root/sudo requis pour certains outils (netdiscover, aircrack-ng, masscan)
+- **Operating system**: Linux (optimized for Kali, Ubuntu, Debian, Arch)
+- **Permissions**: root/sudo required for some tools (netdiscover, aircrack-ng, masscan)
 
 ---
 
-## ⚠️ Avertissement légal
+## ⚠️ Legal notice
 
-**Ce programme est destiné à :**
-- ✅ Tests de pénétration autorisés
-- ✅ Sécurité informatique éducative
-- ✅ Usage personnel sur vos propres systèmes
-- ✅ Recherche en cybersécurité
+**This program is intended for:**
+- ✅ Authorized penetration testing
+- ✅ Educational computer security
+- ✅ Personal use on your own systems
+- ✅ Cybersecurity research
 
-**Ce programme ne doit pas être utilisé pour :**
-- ❌ Accéder à des systèmes sans autorisation
-- ❌ Activités illégales ou malveillantes
-- ❌ Tout autre usage non éthique ou non légal
+**This program must not be used for:**
+- ❌ Accessing systems without authorization
+- ❌ Illegal or malicious activities
+- ❌ Any other unethical or unlawful use
 
-**L'auteur ne peut être tenu responsable de toute utilisation inappropriée.**
+**The author cannot be held responsible for any inappropriate use.**
 
 ---
 
-## 📄 Licence
+## 📄 License
 
-Ce projet est sous licence **MIT**. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+This project is licensed under the **MIT** License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 <p align="center">
-  <b>Fait avec ❤️ par <a href="https://github.com/s1d9e">s1d9e</a></b>
+  <b>Made with ❤️ by <a href="https://github.com/s1d9e">s1d9e</a></b>
 </p>
