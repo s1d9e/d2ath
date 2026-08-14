@@ -1,129 +1,130 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=flat-square&logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
   <img src="https://img.shields.io/github/stars/s1d9e/d2ath?style=flat-square" alt="Stars">
   <img src="https://img.shields.io/github/forks/s1d9e/d2ath?style=flat-square" alt="Forks">
+  <img src="https://img.shields.io/badge/Version-2.0.0-blue?style=flat-square" alt="Version">
 </p>
 
 <p align="center">
-  <b>Framework de sécurité ofensiva et défensiva tout-en-un pour Linux.</b>
+  <b>Framework de sécurité offensiva et defensiva tout-en-un pour Linux.</b><br>
+  <i>Dépendances externes : aucune (bibliothèque standard uniquement).</i>
 </p>
 
 ---
 
 ## ⚠️ Avertissement
 
-> **IMPORTANT** : Ce projet est fourni à des fins **éducatives uniquement**. 
+> **IMPORTANT** : Ce projet est fourni à des fins **éducatives uniquement**.
 > L'auteur **décline toute responsabilité** en cas de mauvaise utilisation de cet outil.
 > Toute action interdite sans consentement explicite est **illégale**.
 
 ---
 
-## 📋 Table des matières
+## 📋 Sommaire
 
 - [Fonctionnalités](#-fonctionnalités)
 - [Installation](#-installation)
-- [Capture d'écran](#-capture-décran)
+- [Utilisation](#-utilisation)
 - [Structure](#-structure)
+- [Développement](#-développement)
 - [Prérequis](#-prérequis)
-- [Avertissement](#-avertissement)
+- [Avertissement légal](#-avertissement-légal)
 - [Licence](#-licence)
 
 ---
 
 ## 🔧 Fonctionnalités
 
-### 📁 Structure par catégorie
-
 | Catégorie | Description |
 |-----------|-------------|
-| **Reconnaissance** | Scan de ports, ping scan, DNS lookup, Whois, GeoIP, Traceroute |
-| **Réseau** | Mon IP, IP locale, Netdiscover, Wireshark, Ping, Vérification de port |
-| **Cryptographie** | Générateur de mots de passe, Hash (MD5, SHA256), Base64, URL encode/decode |
-| **Système** | Informations système, Exploration de fichiers |
-| **Exploitation** | Reverse Shell, Encoder/Decoder payloads, Serveur HTTP, Download & Execute, Metasploit |
-| **Audit** | Nmap, Masscan, Aircrack-ng, Nikto, Hydra, John the Ripper, Hashcat, SQLMap |
+| **Reconnaissance** | Scan de ports (parallèle), ping scan, DNS, Whois, GeoIP, Traceroute |
+| **Réseau** | IP publique/locale, interfaces, passerelle, port, ping, calculatrice réseau, netdiscover, tshark |
+| **Cryptographie** | Mots de passe forts, hashs (MD5/SHA1/SHA256), Base64, URL encode/decode |
+| **Système** | Informations système, exploration de fichiers |
+| **Exploitation** | Reverse shells, encode/décode payloads, serveur HTTP, download & execute, msfvenom |
+| **Audit** | Nmap, Masscan, Aircrack-ng, Nikto, Hydra, John, Hashcat, SQLMap |
 
-### 🛠️ Outils intégrés
+### Points forts (v2.0)
 
-- **Scanner de ports** - Scan rapide des ports ouverts
-- **Ping scan** - Découverte des hôtes actifs sur un réseau
-- **DNS Lookup** - Résolution DNS et reverse lookup
-- **GeoIP** - Localisation géographique d'une adresse IP
-- **Netdiscover** - Scan ARP du réseau local
-- **Wireshark** - Analyseur de paquets réseau (tshark/tcpdump)
-- **Nmap** - Scanner de ports avancé
-- **Aircrack-ng** - Suite d'outils pour attaques WiFi
-- **Hydra** - Attaque par force brute sur les services de connexion
-- **SQLMap** - Détection et exploitation d'injections SQL
-- **Et bien plus...**
+- **CLI complète** : chaque outil est appelable directement en une ligne.
+- **Architecture en package** (`src/d2ath`) : modules par catégorie, registre déclaratif, types, logging.
+- **Aucune dépendance tierce** : bibliothèque standard Python uniquement.
+- **Scans parallèles** (ports, ping) avec `ThreadPoolExecutor`.
+- **Tests pytest** et **CI GitHub Actions** (ruff + tests multi-versions).
+- **`NO_COLOR` supporté**, erreurs typées, codes de sortie standard.
 
 ---
 
 ## 💻 Installation
 
 ```bash
-# Cloner le dépôt
-git clone https://github.com/s1d9e/d2ath.git
+# Option 1 : installation pip (recommandée)
+python3 -m venv .venv && . .venv/bin/activate
+pip install -e .
 
-# Entrer dans le répertoire
-cd d2ath
+# Option 2 : sans installation, depuis le dépôt
+cd src && python3 -m d2ath --help
 
-# Rendre le script exécutable
-chmod +x d2ath.py
-
-# Exécuter
-python3 d2ath.py
+# Vérification
+d2ath --version
 ```
 
-### Dépendances (installation automatique si manquantes)
+### Outils système optionnels
 
-La plupart des dépendances sont installées automatiquement. Pour une installation manuelle :
+Certains outils d'audit s'appuient sur des binaires système (`nmap`, `hydra`, `sqlmap`, `whois`, …).
+`d2ath` les détecte et propose de les installer automatiquement en mode interactif.
 
 ```bash
-# Ubuntu / Debian
-sudo apt update
-sudo apt install python3 python3-pip whois curl nmap masscan netdiscover wireshark tshark tcpdump nikto hydra john sqlmap
+# Ubuntu / Debian (Kali inclus)
+sudo apt install whois nmap masscan netdiscover tshark tcpdump nikto hydra john sqlmap
 
 # Arch Linux
-sudo pacman -S python python-pip whois nmap masscan netdiscover wireshark-cli tcpdump nikto hydra john sqlmap
+sudo pacman -S whois nmap masscan netdiscover wireshark-cli tcpdump nikto hydra john sqlmap
 
 # Fedora
-sudo dnf install python3 python3-pip nmap masscan netdiscover wireshark-cli tcpdump nikto hydra john sqlmap
+sudo dnf install nmap masscan netdiscover wireshark-cli tcpdump nikto hydra john sqlmap
 ```
 
 ---
 
-## 📷 Capture d'écran
+## 🖥️ Utilisation
 
+### Menu interactif
+
+```bash
+d2ath
 ```
-:::::::-.    .:::. .,::::::   :::. :::::::::::: ::   .:  
- ;;,   `';, ,;'``;.;;;;''''   ;;`;;;;;;;';;,;;   ;;, 
- `[[     [[ ''  ,[['[[cccc   ,[[ '[[,   [[    ,[[[,,,[[[ 
-  $$,    $$ .c$$P'  $$""""  c$$$cc$$$c  $$    "$$$""$$$ 
- 888_,o8P'd88 _,oo,888oo,__  888   888,  88,    888   "88o
-  MMMMP"`  MMMUP*"^^""""YUMMMYMM   ""`  MMM    MMM    YMM 
 
-   ┌─────────────────────────────────────────┐
-   │         SÉLECTIONNER UNE CATÉGORIE          │
-   └─────────────────────────────────────────┘
+### Ligne de commande
 
-   ┌─[ 1 ]  ▸ RECONNAISSANCE
-   └─────────────────────────────────────────────╜
-   ┌─[ 2 ]  ▸ RÉSEAU
-   └─────────────────────────────────────────────╜
-   ┌─[ 3 ]  ▸ CRYPTOGRAPHIE
-   └─────────────────────────────────────────────╜
-   ┌─[ 4 ]  ▸ SYSTÈME
-   └─────────────────────────────────────────────╜
-   ┌─[ 5 ]  ▸ EXPLOITATION
-   └─────────────────────────────────────────────╜
-   ┌─[ 6 ]  ▸ AUDIT
-   └─────────────────────────────────────────────╜
+```bash
+# Lister tous les outils
+d2ath --list
 
-   ┌─[ q ]  Quitter
-   └────────────────────╜
+# Appeler un outil directement
+d2ath ports --target 192.168.1.1
+d2ath ports --target 192.168.1.1 --start 1 --end 10000
+d2ath password --length 20 --special true
+d2ath netcalc --ip 192.168.1.37 --cidr 24
+d2ath hashcat
 ```
+
+Sans paramètres requis, l'outil vous les demande interactivement :
+
+```bash
+$ d2ath whois
+[?] IP ou Domaine : example.com
+```
+
+### Codes de sortie
+
+| Code | Signification |
+|------|---------------|
+| `0` | Succès |
+| `1` | Échec d'exécution |
+| `2` | Erreur d'usage (paramètre manquant/invalide) |
+| `130` | Interruption (Ctrl+C) |
 
 ---
 
@@ -131,22 +132,51 @@ sudo dnf install python3 python3-pip nmap masscan netdiscover wireshark-cli tcpd
 
 ```
 d2ath/
-├── d2ath.py      # Script principal
-├── colors.py     # Module de couleurs (optionnel)
-├── README.md     # Ce fichier
-├── LICENSE       # Licence MIT
-└── .github/
-    └── workflows/
-        └── lint.yml  # GitHub Actions
+├── pyproject.toml            # Packaging, scripts, config ruff/pytest
+├── src/d2ath/
+│   ├── __init__.py           # Version
+│   ├── __main__.py           # python -m d2ath
+│   ├── cli.py                # Argparse + point d'entrée
+│   ├── app.py                # Boucle TUI interactive
+│   ├── colors.py             # ANSI + NO_COLOR
+│   ├── context.py            # Contexte d'outil (prompt / CLI unifiés)
+│   ├── errors.py             # Exceptions typées
+│   ├── registry.py           # Registre déclaratif des outils
+│   ├── ui.py                 # Bannière et menus
+│   ├── utils.py              # Réseau, calcul réseau, sous-processus, paquets
+│   └── tools/
+│       ├── recon.py          # Reconnaissance
+│       ├── network.py        # Réseau
+│       ├── crypto.py         # Cryptographie
+│       ├── system.py         # Système
+│       ├── exploit.py        # Exploitation (pédagogique)
+│       └── audit.py          # Audit
+├── tests/                    # Tests pytest
+├── .github/workflows/ci.yml  # CI (ruff + pytest)
+└── LICENSE                   # Licence MIT
+```
+
+---
+
+## 🧪 Développement
+
+```bash
+pip install -e ".[dev]"
+
+# Lint
+ruff check .
+
+# Tests
+pytest
 ```
 
 ---
 
 ## 📌 Prérequis
 
-- **Python 3.8+**
+- **Python 3.9+**
 - **Système d'exploitation** : Linux (optimisé pour Kali, Ubuntu, Debian, Arch)
-- **Permissions** : root/sudo requis pour certains outils (netdiscover, aircrack-ng, nmap)
+- **Permissions** : root/sudo requis pour certains outils (netdiscover, aircrack-ng, masscan)
 
 ---
 
@@ -161,9 +191,9 @@ d2ath/
 **Ce programme ne doit pas être utilisé pour :**
 - ❌ Accéder à des systèmes sans autorisation
 - ❌ Activités illégales ou malveillantes
-- ❌ Tout autre usage非éthique ou非légal
+- ❌ Tout autre usage non éthique ou non légal
 
-**L'auteur ne peut être tenu responsable de toute utilisation 非appropriée.**
+**L'auteur ne peut être tenu responsable de toute utilisation inappropriée.**
 
 ---
 
@@ -175,9 +205,4 @@ Ce projet est sous licence **MIT**. Voir le fichier [LICENSE](LICENSE) pour plus
 
 <p align="center">
   <b>Fait avec ❤️ par <a href="https://github.com/s1d9e">s1d9e</a></b>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=flat-square" alt="Version">
-  <img src="https://img.shields.io/badge/Python-3.8+-blue?style=flat-square" alt="Python">
 </p>
